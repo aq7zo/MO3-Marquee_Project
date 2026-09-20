@@ -80,8 +80,24 @@ Command names are case-insensitive and surrounding whitespace is ignored.
 `set_text` preserves the spacing of its argument and accepts optional
 surrounding double quotes.
 
-The prompt supports shell-style line editing — Left/Right, Ctrl+Left/Right by
-word, Home/End, Ctrl+U and Ctrl+K — and a 100-entry command history on Up/Down.
+## Keybinds
+
+The prompt supports shell-style line editing and a 100-entry command history.
+
+| Key | Action |
+| --- | --- |
+| `Left` / `Right` | Move the cursor one character |
+| `Ctrl+Left` / `Ctrl+Right` | Move the cursor one word |
+| `Home` / `Ctrl+A` | Jump to the start of the line |
+| `End` / `Ctrl+E` | Jump to the end of the line |
+| `Up` / `Ctrl+P` | Previous command in history |
+| `Down` / `Ctrl+N` | Next command in history |
+| `Ctrl+U` | Delete from the cursor to the start of the line |
+| `Ctrl+K` | Delete from the cursor to the end of the line |
+| `Backspace` | Delete the character before the cursor |
+| `Enter` | Submit the line |
+| `Esc` | Clear the line |
+| `Ctrl+C` | Exit cleanly (same as `exit`) |
 
 ## Configuration
 
