@@ -98,6 +98,10 @@ void KeyboardProcess::handleKeyEvent(const KEY_EVENT_RECORD& key) {
             return edit([this] { state_.inputMoveCursor(CursorMove::Home); });
         case VK_END:
             return edit([this] { state_.inputMoveCursor(CursorMove::End); });
+        case VK_PRIOR: 
+            return edit([this] { state_.scrollOutputPage(+1); });
+        case VK_NEXT:   
+            return edit([this] { state_.scrollOutputPage(-1); });
         case VK_UP:
             return edit([this] { state_.inputRecallHistory(HistoryStep::Prev); });
         case VK_DOWN:

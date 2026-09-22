@@ -89,6 +89,7 @@ The prompt supports shell-style line editing and a 100-entry command history.
 | `Left` / `Right` | Move the cursor one character |
 | `Ctrl+Left` / `Ctrl+Right` | Move the cursor one word |
 | `Home` / `Ctrl+A` | Jump to the start of the line |
+| `PageUp` / `PageDn` | Scroll output panel through history |
 | `End` / `Ctrl+E` | Jump to the end of the line |
 | `Up` / `Ctrl+P` | Previous command in history |
 | `Down` / `Ctrl+N` | Next command in history |

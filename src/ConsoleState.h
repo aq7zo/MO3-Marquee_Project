@@ -92,10 +92,22 @@ public:
     bool waitAndPopCommand(std::wstring& out, std::chrono::milliseconds timeout);
 
     // ---- output history --------------------------------------------------
-    void addOutput(std::wstring line);
-    void addOutputLines(const std::vector<std::wstring>& lines);
+    struct OutputLine {
+        std::wstring text;
+        bool isCommand = false;
+    };
+
+    void addOutput(std::wstring line, bool isCommand = false);
+    void addOutputLines(const std::vector<std::wstring>& lines, bool isCommand = false);
     void clearOutput();
     std::vector<std::wstring> outputTail(size_t count) const;
+
+    // ---- output scrolling ----
+    void scrollOutputPage(int direction);   // +1 = back in history, -1 = toward live
+    void scrollOutputToBottom();
+    bool isOutputScrolled() const;
+    std::vector<OutputLine> outputWindow(size_t visibleLines) const;
+    void setOutputViewportHeight(int height) const;
 
     // ---- input latency instrumentation -----------------------------------
     // The keyboard process stamps the arrival of a keystroke; the display
@@ -121,11 +133,14 @@ private:
     std::wstring historyDraft_;
 
     mutable std::mutex outputMutex_;
-    std::deque<std::wstring> output_;
+    std::deque<OutputLine> output_;
 
     mutable std::mutex queueMutex_;
     std::condition_variable queueCv_;
     std::deque<std::wstring> commandQueue_;
+
+    mutable std::atomic<int> outputViewportHeight_{0};
+    size_t outputScroll_ = 0; // lines hidden below the current view; 0 = live
 
     // 0 means "no keystroke awaiting display".
     std::atomic<long long> pendingKeyTicks_{0};

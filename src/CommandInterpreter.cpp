@@ -37,7 +37,7 @@ void CommandInterpreter::execute(const std::wstring& line) {
     if (cmd.id == CommandId::Empty) return;
 
     // Echo first so the output history reads like a real shell transcript.
-    state_.addOutput(L"> " + parser::trim(line));
+    state_.addOutput(L"> " + parser::trim(line), true);
 
     switch (cmd.id) {
         case CommandId::Help:
