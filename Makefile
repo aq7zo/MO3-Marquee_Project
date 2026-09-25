@@ -5,7 +5,8 @@ SHELL       := cmd.exe
 .SHELLFLAGS := /c
 
 CXX      ?= g++
-CXXFLAGS ?= -std=c++17 -O2 -Wall
+CXXFLAGS ?= -std=c++17 -O2 -Wall 
+CXXFLAGS += -DNOMINMAX -DWIN32_LEAN_AND_MEAN
 LDFLAGS  ?= -static -pthread
 TARGET   := MarqueeConsole.exe
 SRCS     := $(wildcard src/*.cpp)

@@ -1,0 +1,41 @@
+Here's the requirements checklist from the CSOPESY Semi-Major Output 1 spec (updated Sept 18, 2026).
+
+## A. Console UI / Display
+
+- [ ] The program runs as an "OS emulator": a console app that accepts typed commands and shows output.
+- [ ] The startup screen shows a header, either the text "Welcome to CSOPESY!" or an ASCII-art "CSOPESY" banner.
+- [ ] The startup screen shows a "Group developer:" section listing all member names.
+- [ ] The startup screen shows a "Version date:" field, filled in.
+- [ ] A command prompt is displayed (e.g., `Command>`) and waits for input.
+- [ ] The CLI design resembles a standard Linux shell, PowerShell, or Windows command line.
+
+## B. Main Menu Marquee
+
+- [ ] The main menu console has a text marquee or an ASCII-graphics marquee.
+- [ ] The marquee visibly animates (scrolls or moves) when started.
+- [ ] The marquee's behavior can be changed through commands while the program is running.
+- [ ] **[Implied]** The marquee animates while the prompt still accepts input. Typing must not be blocked or garbled by the animation.
+- [ ] **[Implied]** The display refresh rate and the keyboard polling rate are handled separately. The spec asks you to tune the balance between them.
+
+## C. Command Interpreter
+
+All six commands must work from the main menu:
+
+- [ ] `help` displays every command with a description.
+- [ ] `start_marquee` starts the marquee animation.
+- [ ] `stop_marquee` stops the marquee animation.
+- [ ] `set_text` accepts text input and displays it as the marquee.
+- [ ] `set_speed` sets the animation refresh interval in milliseconds.
+- [ ] `exit` terminates the console cleanly.
+- [ ] **[Implied]** Unrecognized or malformed commands, such as a non-numeric `set_speed` value, are handled gracefully without crashing, as a real shell would.
+- [ ] **[Implied]** Commands work in any order and repeatedly. For example: start → set_text → set_speed → stop → start again.
+
+## D. Source Submission
+
+- [ ] The source code is complete, or a GitHub link is provided instead.
+- [ ] A `README.txt` is included with:
+  - [ ] Group member names
+  - [ ] Instructions for running the program
+  - [ ] The entry class/file where the main function is located
+
+A program counts as matching the spec only when every non-implied item in sections A–C passes. 

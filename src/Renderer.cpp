@@ -133,16 +133,24 @@ void Renderer::drawOutput(FrameBuffer& fb, const ConsoleState& state) const {
     if (layout_.outputHeight < 3) return;
 
     fb.drawBox(0, layout_.outputTop, layout_.width, layout_.outputHeight, color::kDarkGray);
-    fb.drawText(3, layout_.outputTop, L"[ output ]", color::kDarkGray);
 
     const int interior = layout_.outputInteriorHeight();
-    const std::vector<std::wstring> lines = state.outputTail(static_cast<size_t>(interior));
+    state.setOutputViewportHeight(interior);
+
+    const std::wstring title = state.isOutputScrolled()
+        ? L"[ output: scrolled - PgDn to resume ]"
+        : L"[ output ]";
+    fb.drawText(3, layout_.outputTop, title, color::kDarkGray);
+
+    const std::vector<ConsoleState::OutputLine> lines =
+        state.outputWindow(static_cast<size_t>(interior));
     for (size_t i = 0; i < lines.size(); ++i) {
+        const WORD lineColor = lines[i].isCommand ? color::kGreen : color::kGray;
         fb.drawTextClipped(2,
                            layout_.outputTop + 1 + static_cast<int>(i),
                            layout_.width - 3,
-                           lines[i],
-                           color::kGray);
+                           lines[i].text,
+                           lineColor);
     }
 }
 

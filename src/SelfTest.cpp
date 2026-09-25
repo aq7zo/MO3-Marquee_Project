@@ -339,10 +339,17 @@ void testInputCursorEditing() {
     state.inputBackspace();
     check(state.inputSnapshot().text == L"hello world", "backspace deletes before the caret");
 
+    state.inputDelete();
+    check(state.inputSnapshot().text == L"helloworld", "delete removes the character after the caret");
+    checkEq(state.inputSnapshot().cursor, 5, "delete leaves the caret where it was");
+    state.inputAppend(L' ');
+
     state.inputMoveCursor(CursorMove::End);
     checkEq(state.inputSnapshot().cursor, 11, "End goes to the end of the line");
     state.inputMoveCursor(CursorMove::Right);
     checkEq(state.inputSnapshot().cursor, 11, "Right stops at the end of the line");
+    state.inputDelete();
+    check(state.inputSnapshot().text == L"hello world", "delete at the end of the line does nothing");
     state.inputMoveCursor(CursorMove::Home);
     checkEq(state.inputSnapshot().cursor, 0, "Home goes to the start of the line");
 }

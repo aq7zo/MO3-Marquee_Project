@@ -20,6 +20,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions use
 
 ## [Unreleased]
 
+### Added
+- **Delete** removes the character after the caret.
+- **Ctrl+C / Ctrl+V** copy the input line to, and paste from, the Windows
+  clipboard. Pasted line breaks and control characters are dropped.
+
+### Changed
+- Ctrl+C no longer exits; use `exit`.
+
 Nothing yet. See `.context/todoList_v0.1.md` for what is queued — **P0-1**
 (`README.txt` name) and **P0-3** (`config.ini` version date) still block
 submission.

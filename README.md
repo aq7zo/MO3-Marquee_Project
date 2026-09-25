@@ -89,15 +89,18 @@ The prompt supports shell-style line editing and a 100-entry command history.
 | `Left` / `Right` | Move the cursor one character |
 | `Ctrl+Left` / `Ctrl+Right` | Move the cursor one word |
 | `Home` / `Ctrl+A` | Jump to the start of the line |
+| `PageUp` / `PageDn` | Scroll output panel through history |
 | `End` / `Ctrl+E` | Jump to the end of the line |
 | `Up` / `Ctrl+P` | Previous command in history |
 | `Down` / `Ctrl+N` | Next command in history |
 | `Ctrl+U` | Delete from the cursor to the start of the line |
 | `Ctrl+K` | Delete from the cursor to the end of the line |
 | `Backspace` | Delete the character before the cursor |
+| `Delete` | Delete the character after the cursor |
+| `Ctrl+C` | Copy the input line to the clipboard |
+| `Ctrl+V` | Paste the clipboard at the cursor |
 | `Enter` | Submit the line |
 | `Esc` | Clear the line |
-| `Ctrl+C` | Exit cleanly (same as `exit`) |
 
 ## Configuration
 
