@@ -1,8 +1,44 @@
 #include "KeyboardProcess.h"
 
 #include <array>
+#include <cstring>
+#include <string>
 
 namespace mc {
+
+namespace {
+
+void copyToClipboard(const std::wstring& text) {
+    if (!OpenClipboard(nullptr)) return;
+    EmptyClipboard();
+    const size_t bytes = (text.size() + 1) * sizeof(wchar_t);
+    if (HGLOBAL mem = GlobalAlloc(GMEM_MOVEABLE, bytes)) {
+        if (void* dst = GlobalLock(mem)) {
+            std::memcpy(dst, text.c_str(), bytes);
+            GlobalUnlock(mem);
+            // On success the clipboard owns the memory; on failure it is ours.
+            if (!SetClipboardData(CF_UNICODETEXT, mem)) GlobalFree(mem);
+        } else {
+            GlobalFree(mem);
+        }
+    }
+    CloseClipboard();
+}
+
+std::wstring readClipboard() {
+    std::wstring text;
+    if (!OpenClipboard(nullptr)) return text;
+    if (HANDLE mem = GetClipboardData(CF_UNICODETEXT)) {
+        if (const auto* src = static_cast<const wchar_t*>(GlobalLock(mem))) {
+            text = src;
+            GlobalUnlock(mem);
+        }
+    }
+    CloseClipboard();
+    return text;
+}
+
+}  // namespace
 
 KeyboardProcess::KeyboardProcess(ConsoleState& state, HANDLE input)
     : Process("keyboard", state.pollingMs.load()), state_(state), input_(input) {}
@@ -54,12 +90,22 @@ void KeyboardProcess::handleKeyEvent(const KEY_EVENT_RECORD& key) {
     const bool ctrlHeld =
         (key.dwControlKeyState & (LEFT_CTRL_PRESSED | RIGHT_CTRL_PRESSED)) != 0;
 
-    // PROCESSED_INPUT is disabled, so Ctrl+C arrives here as an ordinary key
-    // rather than terminating the process mid-frame. Treat it as a clean exit
-    // so the console state is always restored.
-    if (ctrlHeld && (key.wVirtualKeyCode == 'C' || ch == 3)) {
+    // PROCESSED_INPUT is disabled, so Ctrl+C arrives here as an ordinary key.
+    // There is no selection, so it copies the whole input line; `exit` quits.
+    if (ctrlHeld && key.wVirtualKeyCode == 'C') {
         state_.markKeyReceived();
-        state_.requestShutdown();
+        copyToClipboard(state_.inputSnapshot().text);
+        return;
+    }
+
+    // Pasted text goes through inputAppend one character at a time, so it
+    // inserts at the caret and respects the input length limit. Line breaks
+    // and other control characters are dropped to keep it a single line.
+    if (ctrlHeld && key.wVirtualKeyCode == 'V') {
+        state_.markKeyReceived();
+        for (wchar_t c : readClipboard()) {
+            if (c >= L' ' && c != 0x7F) state_.inputAppend(c);
+        }
         return;
     }
 
@@ -114,6 +160,8 @@ void KeyboardProcess::handleKeyEvent(const KEY_EVENT_RECORD& key) {
             state_.markKeyReceived();
             state_.inputBackspace();
             return;
+        case VK_DELETE:
+            return edit([this] { state_.inputDelete(); });
         case VK_ESCAPE:
             state_.markKeyReceived();
             state_.inputClear();

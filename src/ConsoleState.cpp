@@ -101,6 +101,11 @@ void ConsoleState::inputBackspace() {
     --inputCursor_;
 }
 
+void ConsoleState::inputDelete() {
+    std::lock_guard<std::mutex> lock(inputMutex_);
+    if (inputCursor_ < inputLine_.size()) inputLine_.erase(inputCursor_, 1);
+}
+
 void ConsoleState::inputClear() {
     std::lock_guard<std::mutex> lock(inputMutex_);
     inputLine_.clear();

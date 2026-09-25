@@ -65,6 +65,7 @@ public:
 
     void inputAppend(wchar_t ch);
     void inputBackspace();
+    void inputDelete();
     void inputClear();
     InputSnapshot inputSnapshot() const;
 

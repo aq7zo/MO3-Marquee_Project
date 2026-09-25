@@ -96,9 +96,11 @@ The prompt supports shell-style line editing and a 100-entry command history.
 | `Ctrl+U` | Delete from the cursor to the start of the line |
 | `Ctrl+K` | Delete from the cursor to the end of the line |
 | `Backspace` | Delete the character before the cursor |
+| `Delete` | Delete the character after the cursor |
+| `Ctrl+C` | Copy the input line to the clipboard |
+| `Ctrl+V` | Paste the clipboard at the cursor |
 | `Enter` | Submit the line |
 | `Esc` | Clear the line |
-| `Ctrl+C` | Exit cleanly (same as `exit`) |
 
 ## Configuration
 
