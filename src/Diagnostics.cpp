@@ -31,7 +31,7 @@ std::string toUtf8(const std::wstring& text) {
 
 int runFrameDump() {
     bool configFound = false;
-    const Config config = Config::loadOrDefault("config.ini", &configFound);
+    const Config config = Config::loadOrDefault("config.txt", &configFound);
 
     const Renderer renderer(config, config.consoleWidth, config.consoleHeight);
     ConsoleState state(config);

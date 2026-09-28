@@ -41,7 +41,7 @@ std::string lower(std::string s) {
 }
 
 // Only overwrites the target when the value parses as an integer, so a typo in
-// config.ini degrades to the default instead of zeroing a rate.
+// config.txt degrades to the default instead of zeroing a rate.
 void assignInt(const std::string& value, int& target) {
     try {
         size_t consumed = 0;

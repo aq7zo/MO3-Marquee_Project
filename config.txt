@@ -1,0 +1,25 @@
+# MO3 - Marquee Console : runtime parameters
+
+[console]
+console_width  = 100
+console_height = 42
+marquee_zone_height = 9
+
+[marquee]
+marquee_text     = Hello world!
+# set_speed - how often the marquee advances one step.
+marquee_speed_ms = 50
+auto_start_marquee = false
+
+[rates]
+# set_refresh - how often a whole frame is composed and presented.
+# Raise this (slower) to make screen tearing appear; 16 ms is about 60 FPS.
+refresh_ms = 16
+# set_polling_rate - how often the keyboard is polled.
+# Raise this (slower) to make typing feel laggy.
+polling_ms = 10
+
+[about]
+developers   = CAMPO, Enzo; GARCIA, Andrea; MORGAN, Jack; TENORIO, Jeroen
+version_date = September 28 2026
+version      = 1.1.1

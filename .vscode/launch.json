@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "make run-window",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "make run-window",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

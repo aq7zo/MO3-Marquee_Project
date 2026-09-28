@@ -11,7 +11,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/). Versions use
 
 - Bump **PATCH** for fixes and doc changes, **MINOR** for new commands or features,
   **MAJOR** only if the command surface breaks.
-- On every bump: update `[about] version` in `config.ini`, add the entry here, and
+- On every bump: update `[about] version` in `config.txt`, add the entry here, and
   take a snapshot into `versions/vX.Y.Z_YYYY-MM-DD/`.
 - A version is only recorded after `--selftest` passes and `--dumpframe` shows the
   welcome screen intact.

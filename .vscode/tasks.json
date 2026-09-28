@@ -33,6 +33,13 @@
             },
             "problemMatcher": ["$gcc"],
             "group": "test"
+        },
+        {
+            "type": "shell",
+            "label": "make build",
+            "command": "make",
+            "options": { "cwd": "${workspaceFolder}" },
+            "problemMatcher": ["$gcc"]
         }
     ],
     "version": "2.0.0"

@@ -15,13 +15,13 @@ TITLE    := MO3 - Marquee Console
 # The window has to be exactly console_width x console_height: Renderer lays the
 # header, marquee zone, output zone and prompt out to fill that, so anything
 # smaller loses rows off the bottom and anything larger leaves dead space.
-# Read from config.ini so editing it is still enough - no rebuild, no edit here.
-# The fallbacks match Config.h, for when config.ini is absent.
+# Read from config.txt so editing it is still enough - no rebuild, no edit here.
+# The fallbacks match Config.h, for when config.txt is absent.
 WINDIR  := $(if $(SystemRoot),$(SystemRoot),C:\Windows)
 CONHOST := $(if $(wildcard $(WINDIR)\Sysnative\conhost.exe),$(WINDIR)\Sysnative\conhost.exe,$(WINDIR)\System32\conhost.exe)
 
-CFG_COLS := $(shell for /f "tokens=3" %%a in ('findstr /b console_width config.ini') do @echo %%a)
-CFG_ROWS := $(shell for /f "tokens=3" %%a in ('findstr /b console_height config.ini') do @echo %%a)
+CFG_COLS := $(shell for /f "tokens=3" %%a in ('findstr /b console_width config.txt') do @echo %%a)
+CFG_ROWS := $(shell for /f "tokens=3" %%a in ('findstr /b console_height config.txt') do @echo %%a)
 COLS     := $(if $(CFG_COLS),$(CFG_COLS),100)
 ROWS     := $(if $(CFG_ROWS),$(CFG_ROWS),42)
 

@@ -35,7 +35,7 @@
 
 namespace {
 
-constexpr const char* kConfigPath = "config.ini";
+constexpr const char* kConfigPath = "config.txt";
 
 bool hasFlag(int argc, char** argv, const char* flag) {
     for (int i = 1; i < argc; ++i) {

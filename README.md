@@ -7,7 +7,7 @@ scheduler and drawn tear-free into one off-screen frame buffer.
 ```
 +--------------------------------------------------------+
 |                                                        |
-|            Hello world in marquee!                     |
+|                      Hello world!                      |
 |                                                        |
 +--------------------------------------------------------+
 Enter a command> set_speed 30
@@ -46,7 +46,7 @@ make run-window
 | --- | --- |
 | `make` | Compiles every `src/*.cpp` into `MarqueeConsole.exe` |
 | `make run` | Builds, clears scrollback, then runs in the current console |
-| `make run-window` | Opens a new `conhost.exe` window sized to `config.ini` and runs there |
+| `make run-window` | Opens a new `conhost.exe` window sized to `config.txt` and runs there |
 | `make size` | Prints the console size the layout expects (e.g. `100 x 42`) |
 | `make clean` | Deletes the built executable |
 
@@ -104,7 +104,7 @@ The prompt supports shell-style line editing and a 100-entry command history.
 
 ## Configuration
 
-`config.ini` holds every startup parameter: console size, marquee text and speed,
+`config.txt` holds every startup parameter: console size, marquee text and speed,
 refresh and polling rates, developer names and version. It is read at startup; if
 it is missing, the built-in defaults from `Config.h` are used.
 
@@ -162,12 +162,12 @@ caret is drawn into the frame instead.
 
 ```
 .
-├── config.ini            Runtime parameters — no rebuild needed
+├── config.txt            Runtime parameters — no rebuild needed
 ├── Makefile              Build, run, and window-sizing targets
 ├── CHANGELOG.md          Version history and bump conventions
 └── src/
     ├── main.cpp                Entry point, wiring, shutdown
-    ├── Config.*                config.ini parsing, defaults, bounds
+    ├── Config.*                config.txt parsing, defaults, bounds
     ├── ConsoleScreen.*         Win32 console RAII, raw mode, presentation
     ├── FrameBuffer.*           CHAR_INFO grid and drawing primitives
     ├── Renderer.*              Layout, CSOPESY banner, frame composition
@@ -186,7 +186,7 @@ caret is drawn into the frame instead.
     └── Diagnostics.*           Headless frame dump (--dumpframe)
 ```
 
-`main()` lives in `src/main.cpp`. It loads `config.ini`, takes over the console,
+`main()` lives in `src/main.cpp`. It loads `config.txt`, takes over the console,
 creates the four processes, hands them to the `Scheduler`, and waits for the
 shutdown signal.
 

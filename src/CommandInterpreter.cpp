@@ -27,8 +27,8 @@ void CommandInterpreter::attach(Scheduler* scheduler, ProcessHandles handles) {
 
 void CommandInterpreter::printWelcome(bool configFileFound) {
     state_.addOutput(L"CSOPESY Marquee Console ready.");
-    state_.addOutput(configFileFound ? L"Loaded parameters from config.ini."
-                                     : L"No config.ini found - using built-in defaults.");
+    state_.addOutput(configFileFound ? L"Loaded parameters from config.txt."
+                                     : L"No config.txt found - using built-in defaults.");
     state_.addOutput(L"Type 'help' to see the available commands.");
 }
 

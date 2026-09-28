@@ -6,7 +6,7 @@
 namespace mc {
 
 // Bounds for every runtime-tunable rate, defined once so the parser, the
-// commands and config.ini all agree on what is acceptable.
+// commands and config.txt all agree on what is acceptable.
 namespace limits {
 constexpr int kMinSpeedMs = 1;
 constexpr int kMaxSpeedMs = 60000;
@@ -21,7 +21,7 @@ constexpr int kMaxInputLength = 256;
 constexpr int kMaxVersionLength = 16;
 }  // namespace limits
 
-// Startup parameters, all overridable from config.ini.
+// Startup parameters, all overridable from config.txt.
 //
 // The quiz forbids recompiling ("you should only modify the parameters"), so
 // anything that might need changing under time pressure lives here and is also
